@@ -10,7 +10,7 @@ export const Input: React.FC<InputPropsType> = (props) => {
     return (
         <StyledInput value={props.title} onChange={(e) => {
             props.changeTitle(e.currentTarget.value)
-        }}/>
+        }} disabled/>
     );
 };
 

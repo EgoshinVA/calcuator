@@ -5,35 +5,34 @@ import {Button} from "./components/button/Button";
 import styled from "styled-components";
 
 function App() {
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState<string>('')
+    const [arr, setArr] = useState<string[]>([])
+    const [mathOper, setMathOper] = useState<string[]>([])
 
     const changeTitle = (newTitle: string) => {
         setTitle(newTitle)
     }
 
     const addSymbol = (number: string) => {
+        title === '' && ['-', '+', '*', '/'].includes(number)
         setTitle(title + number)
+    }
+
+    const showResult = () => {
+        console.log(title.split('').filter(n => ![0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(Number(n))))
+
     }
 
     return (
         <StyledApp>
             <Input title={title} changeTitle={changeTitle}/>
             <Buttons>
-                <Button addSymbol={addSymbol} title={'1'}/>
-                <Button addSymbol={addSymbol} title={'2'}/>
-                <Button addSymbol={addSymbol} title={'3'}/>
-                <Button addSymbol={addSymbol} title={'4'}/>
-                <Button addSymbol={addSymbol} title={'5'}/>
-                <Button addSymbol={addSymbol} title={'6'}/>
-                <Button addSymbol={addSymbol} title={'7'}/>
-                <Button addSymbol={addSymbol} title={'8'}/>
-                <Button addSymbol={addSymbol} title={'9'}/>
-                <Button addSymbol={addSymbol} title={'0'}/>
+                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => <Button key={n} addSymbol={addSymbol} title={`${n}`}/>)}
                 <Button addSymbol={addSymbol} title={'+'}/>
                 <Button addSymbol={addSymbol} title={'-'}/>
                 <Button addSymbol={addSymbol} title={'*'}/>
                 <Button addSymbol={addSymbol} title={'/'}/>
-                <Button addSymbol={addSymbol} title={'='}/>
+                <Button addSymbol={showResult} title={'='}/>
                 <Button addSymbol={addSymbol} title={'<='}/>
             </Buttons>
         </StyledApp>
