@@ -6,21 +6,28 @@ import styled from "styled-components";
 
 function App() {
     const [title, setTitle] = useState<string>('')
-    const [arr, setArr] = useState<string[]>([])
-    const [mathOper, setMathOper] = useState<string[]>([])
 
     const changeTitle = (newTitle: string) => {
         setTitle(newTitle)
     }
 
     const addSymbol = (number: string) => {
-        title === '' && ['-', '+', '*', '/'].includes(number)
+        if (title === '')
+            if (['-', '+', '*', '/'].includes(number))
+                return 0
         setTitle(title + number)
     }
 
     const showResult = () => {
-        console.log(title.split('').filter(n => ![0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(Number(n))))
+        title && setTitle(eval(title))
+    }
 
+    const clearTitle = () => {
+        setTitle('')
+    }
+
+    const backspace = () => {
+        title && setTitle(title.slice(0, title.length-1))
     }
 
     return (
@@ -33,7 +40,8 @@ function App() {
                 <Button addSymbol={addSymbol} title={'*'}/>
                 <Button addSymbol={addSymbol} title={'/'}/>
                 <Button addSymbol={showResult} title={'='}/>
-                <Button addSymbol={addSymbol} title={'<='}/>
+                <Button addSymbol={backspace} title={'<='}/>
+                <Button addSymbol={clearTitle} title={'C'}/>
             </Buttons>
         </StyledApp>
     );

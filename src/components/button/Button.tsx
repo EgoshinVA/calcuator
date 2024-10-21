@@ -20,4 +20,5 @@ const StyledButton = styled.button`
   font-weight: bold;
   width: 33px;
   height: 33px;
+  flex-grow: 1;
 `
